@@ -1,0 +1,7 @@
+{
+  "name": "healthychef",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
