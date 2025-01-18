@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeToggleService } from 'src/app/core/utils/theme-toggle.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(
+    private themeToggleService: ThemeToggleService
+  ) {}
+
+  public toggleTheme(): void {
+    this.themeToggleService.toggleTheme();
+  }
 
 }

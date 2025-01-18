@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
+import { IonicStorageService } from './core/services/ionic-storage.service';
 
 register();
 @Component({
@@ -9,5 +10,5 @@ register();
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private _ionicStorageService: IonicStorageService) {}
 }

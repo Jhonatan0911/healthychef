@@ -33,5 +33,119 @@
  */
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+@import "@ionic/angular/css/palettes/dark.class.css";
+// @import "@ionic/angular/css/palettes/dark.system.css";
+
+// Libreria estilos
+@import 'primeflex/primeflex.scss';
+
+ion-item {
+  --transition: none;
+}
+
+.bg-primary{
+  background: #dfdfdf !important;
+}
+.bg-secondary{
+  background: #6f8d5d;
+}
+.bg-third{
+  background: #386922;
+}
+.bg-dark{
+  background: #000000eb !important;
+}
+.bg-wave{
+  background-image: url(assets/images/wave.svg);
+  background-size: cover;
+}
+.bg-primary-2{
+  background: #e0f4db !important;
+}
+
+.text-primary{
+  color: #386922 !important;
+}
+.text-secondary{
+  color: #8c8b8b !important;
+}
+.text-third{
+  color: #dfdfdf !important;
+}
+
+/* Botón primario */
+.btn-primary {
+  background: #EAEAEA !important;
+  color: #386922;
+  border-color: #386922;
+}
+
+.btn-primary:hover {
+  background: #90b778;
+  color: #EAEAEA;
+  border-color: #90b778;
+}
+
+.btn-primary:active {
+  background: #8DBF6D;
+  color: #EAEAEA;
+  border-color: #8DBF6D;
+}
+
+/* Botón secundario */
+.btn-secondary {
+  background: #8DBF6D;
+  color: #FFFFFF;
+  border-color: #8DBF6D;
+}
+
+.btn-secondary:hover {
+  background: #A8D08D;
+  color: #386922;
+  border-color: #A8D08D;
+}
+
+.btn-secondary:active {
+  background: #6DBE45;
+  color: #EAEAEA;
+  border-color: #6DBE45;
+}
+
+/* Botón de acción (terciario) */
+.btn-third {
+  --background: #386922 !important;
+  color: #dfdfdf !important;
+  border-color: #386922 !important;
+}
+
+.btn-third:hover {
+  background: #6DBE45 !important;
+  color: #dfdfdf !important;
+  border-color: #6DBE45 !important;
+}
+
+.btn-third:active {
+  background: #8DBF6D !important;
+  color: #FFFFFF !important;
+  border-color: #8DBF6D !important;
+}
+
+
+.btn-disabled {
+  background: #dfdfdf !important;
+  color: #A8A8A8;
+  border-color: #dfdfdf;
+  cursor: not-allowed;
+}
+
+.btn-disabled:hover {
+  background: #dfdfdf !important;
+  color: #A8A8A8;
+  border-color: #dfdfdf;
+}
+
+.btn-disabled:active {
+  background: #dfdfdf !important;
+  color: #A8A8A8;
+  border-color: #dfdfdf;
+}
