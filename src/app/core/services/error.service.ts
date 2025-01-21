@@ -20,6 +20,9 @@ export class ErrorService {
       (form.controls[nameInput].errors?.['maxlength']
         ? ' Se ha superado el max de caracteres permitidos |'
         : '') +
+      (form.controls[nameInput].errors?.['passwordsMismatch']
+        ? ' Las contraseñas no coinciden |'
+        : '') +
       (form.controls[nameInput].errors?.['minlength']
         ? ' Muy pocos caracteres |'
         : '') +

@@ -1,0 +1,109 @@
+<ion-content [fullscreen]="true">
+  <div class="bg-secondary h-full flex align-content-end justify-content-center flex-wrap">
+    <ion-card color="light" class="flex flex-column p-3 justify-content-center align-items-center w-full card-auth">
+      <h1 class="text-primary font-semibold">Empecemos</h1>
+      <form [formGroup]="form" class="form-container">
+        <ion-grid>
+          <ion-row class="mt-3">
+            <ion-col>
+              <ion-input
+                fill="outline"
+                formControlName="name"
+                labelPlacement="stacked"
+                label="Nombres"
+                type="text">
+                <ion-icon slot="start" name="person-outline" aria-hidden="user"></ion-icon>
+              </ion-input>
+              <small *ngIf="validate('name')">{{ check('name') }}</small>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row class="mt-3">
+            <ion-col>
+              <ion-input
+                fill="outline"
+                formControlName="lastname"
+                labelPlacement="stacked"
+                label="Apellidos"
+                type="text">
+                <ion-icon slot="start" name="person-outline" aria-hidden="true"></ion-icon>
+              </ion-input>
+              <small *ngIf="validate('lastname')">{{ check('lastname') }}</small>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="mt-3">
+            <ion-col>
+              <ion-input
+                fill="outline"
+                formControlName="username"
+                labelPlacement="stacked"
+                label="Usuario"
+                type="text">
+                <ion-icon slot="start" name="color-wand-outline" aria-hidden="true"></ion-icon>
+              </ion-input>
+              <small *ngIf="validate('username')">{{ check('username') }}</small>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="mt-3">
+            <ion-col>
+              <ion-input
+                fill="outline"
+                formControlName="email"
+                labelPlacement="stacked"
+                label="Correo electrónico"
+                type="email">
+                <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+              </ion-input>
+              <small *ngIf="validate('email')">{{ check('email') }}</small>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="mt-3">
+            <ion-col>
+              <ion-input
+                fill="outline"
+                formControlName="password"
+                type="password"
+                labelPlacement="stacked"
+                label="Contraseña">
+                <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+              </ion-input>
+              <small *ngIf="validate('password')">{{ check('password') }}</small>
+            </ion-col>
+            <ion-col>
+              <ion-input
+                fill="outline"
+                formControlName="confirmPassword"
+                type="password"
+                labelPlacement="stacked"
+                label="Confirme la contraseña">
+                <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+              </ion-input>
+              <small *ngIf="validate('confirmPassword')">{{ check('confirmPassword') }}</small>
+              <small id="confirm-password-help" class="text-red-500" *ngIf="form.hasError('passwordsMismatch')">
+                Las contraseñas no coinciden.
+              </small>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div class="flex flex-wrap my-3 justify-content-center">
+          <ion-button
+            class="btn-third w-full mb-3"
+            expand="block"
+            type="submit"
+            shape="round"
+            (click)="register()">
+            Ingresar
+          </ion-button>
+          <p class="text-secondary">¿Ya tienes una cuenta? <a class="text-primary font-bold" routerLink="/auth/login">Ingresa</a></p>
+        </div>
+      </form>
+    </ion-card>
+  </div>
+</ion-content>

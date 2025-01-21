@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorService } from 'src/app/core/services/error.service';
 import { IonicStorageService } from 'src/app/core/services/ionic-storage.service';
 import { LoginService } from '../shared/services/login.service';
@@ -10,15 +9,15 @@ import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
   standalone: false,
 })
-export class LoginComponent  implements OnInit {
+export class LoginPage  implements OnInit {
 
   form = new FormGroup ({
     email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required, this.passwordValidator()]),
+    password: new FormControl(null, [Validators.required]),
   })
 
   constructor(
@@ -50,25 +49,6 @@ export class LoginComponent  implements OnInit {
         this._alertService.showAlert('Datos Invalidos','','Por favor revise su correo y contraseña')
       });
     }
-  }
-
-  passwordValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const password = control.value;
-
-      if (!password) {
-        return null;
-      }
-
-      const hasMinLength = password.length >= 8;
-      const hasUppercase = /[A-Z]/.test(password);
-      const hasLowercase = /[a-z]/.test(password);
-      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-      const valid = hasMinLength && hasUppercase && hasLowercase && hasSpecialChar;
-
-      return valid ? null : { passwordStrength: true };
-    };
   }
 
   validate(nameInput: string) {

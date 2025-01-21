@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { LoginComponent } from './login/login.component';
+import { LoginPage } from './login/login.page';
 import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
+import { RegisterPage } from './register/register.page';
 
 @NgModule({
   imports: [
@@ -9,7 +10,8 @@ import { AuthRoutingModule } from './auth-routing.module';
     SharedModule
   ],
   declarations: [
-    LoginComponent
+    LoginPage,
+    RegisterPage
   ]
 })
 export class AuthModule { }

@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
   <div class="bg-wave h-full flex align-content-end justify-content-center flex-wrap">
-    <ion-card color="light" class="flex flex-column p-3 justify-content-center align-items-center w-full card-login">
+    <ion-card color="light" class="flex flex-column p-3 justify-content-center align-items-center w-full card-auth">
       <h1 class="text-primary font-semibold">Ingresa tus datos</h1>
       <form [formGroup]="form" class="form-container">
         <ion-grid>
@@ -14,7 +14,7 @@
                 type="email">
                 <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
               </ion-input>
-              <small *ngIf="validate('email')" class="error-message">{{ check('email') }}</small>
+              <small *ngIf="validate('email')">{{ check('email') }}</small>
             </ion-col>
           </ion-row>
 
@@ -29,7 +29,7 @@
                 <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
                 <ion-input-password-toggle slot="end"></ion-input-password-toggle>
               </ion-input>
-              <small *ngIf="validate('password')" class="error-message">{{ check('password') }}</small>
+              <small *ngIf="validate('password')">{{ check('password') }}</small>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -40,11 +40,10 @@
             expand="block"
             type="submit"
             shape="round"
-            (click)="login()"
-            [disabled]="!form.valid">
+            (click)="login()">
             Ingresar
           </ion-button>
-          <p class="text-secondary">¿Aún no tienes cuenta? <a class="text-primary font-bold">Registrate</a></p>
+          <p class="text-secondary">¿Aún no tienes cuenta? <a class="text-primary font-bold" routerLink="/auth/register">Registrate</a></p>
         </div>
       </form>
     </ion-card>
