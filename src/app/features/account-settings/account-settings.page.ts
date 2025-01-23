@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { IonicStorageService } from 'src/app/core/services/ionic-storage.service';
 import { UserService } from '../auth/shared/services/user.service';
 import { LoginResponse } from '../auth/shared/models/Login';
+import { ThemeToggleService } from 'src/app/core/utils/theme-toggle.service';
 
 @Component({
   selector: 'app-account-settings',
@@ -29,6 +30,7 @@ export class AccountSettingsPage implements OnInit {
   user: LoginResponse | null = null;
 
   constructor(
+    private themeToggleService: ThemeToggleService,
     private _ionicStorageService: IonicStorageService,
     private _navController: NavController,
     private _userService: UserService,
@@ -38,6 +40,10 @@ export class AccountSettingsPage implements OnInit {
     this._userService.getUser().then(res => {
       this.user = res;
     });
+  }
+
+  public toggleTheme(): void {
+    this.themeToggleService.toggleTheme();
   }
 
   async logout(){

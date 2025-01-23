@@ -5,4 +5,9 @@ export class APIs {
     login: `${environment.apiUrl}/login`,
     register: `${environment.apiUrl}/signup`,
   }
+
+  static posts = {
+    getAll: `${environment.apiUrl}/posts`,
+    create: `${environment.apiUrl}/posts`,
+  }
 };

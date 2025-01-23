@@ -1,0 +1,32 @@
+<ion-card>
+  <ion-item lines="none">
+    <ion-avatar slot="start">
+      <img [src]="post.user.image" />
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ post.user.name }}</h2>
+      <p>Publicado el {{ post.created_at | date: 'longDate' }}</p>
+    </ion-label>
+  </ion-item>
+
+  <img [src]="post.image" />
+
+  <ion-card-content>
+    <p>{{ post.description }}</p>
+  </ion-card-content>
+
+  <ion-item lines="none">
+    <ion-buttons slot="start">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="chatbubble-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-note slot="end">{{ post.likes || 0 }} likes</ion-note>
+  </ion-item>
+</ion-card>

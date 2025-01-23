@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -14,6 +14,11 @@ import { AdminLayoutPage } from './shared/layouts/admin-layout/admin-layout.page
 import { MenuComponent } from './shared/components/menu/menu.component';
 import { provideHttpClient } from '@angular/common/http';
 
+/* This is to set the locale to spanish. */
+import localeEsPe from '@angular/common/locales/es-PE';
+import { DatePipe, registerLocaleData } from '@angular/common';
+registerLocaleData(localeEsPe, 'es-PE');
+
 @NgModule({
   declarations: [AppComponent, UserLayoutPage, AdminLayoutPage,MenuComponent],
   imports: [
@@ -24,8 +29,10 @@ import { provideHttpClient } from '@angular/common/http';
     AppRoutingModule,
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'es-PE' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     IonicStorageService,
+    DatePipe,
     provideHttpClient()
   ],
   bootstrap: [AppComponent],
