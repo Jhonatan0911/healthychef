@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="flex flex-column align-items-center mt-2">
+    <ion-avatar>
+      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar>
+    <h2 class="font-bold">Jhonatan Piña</h2>
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Correo:</ion-label>
+          <ion-note slot="end">johndoe.com</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Teléfono:</ion-label>
+          <ion-note slot="end">+57 304 459 4213</ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Modo oscuro</ion-label>
+      <ion-toggle slot="end"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Notificaciones</ion-label>
+      <ion-toggle slot="end" checked></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Idioma</ion-label>
+      <ion-select slot="end" placeholder="Seleccionar">
+        <ion-select-option value="es">Español</ion-select-option>
+        <ion-select-option value="en">Inglés</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <div class="absolute bottom-0">
+    <ion-button fill="clear" id="logout-alert">
+      <ion-icon slot="start" name="power-outline"></ion-icon>
+      Salir
+    </ion-button>
+    <ion-alert
+      trigger="logout-alert"
+      header="¿Estás seguro de salir?"
+      [buttons]="alertButtons"
+    ></ion-alert>
+  </div>
+</ion-content>

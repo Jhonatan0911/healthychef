@@ -9,9 +9,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/modules/shared.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { IonicStorageService } from './core/services/ionic-storage.service';
+import { UserLayoutPage } from './shared/layouts/user-layout/user-layout.page';
+import { AdminLayoutPage } from './shared/layouts/admin-layout/admin-layout.page';
+import { MenuComponent } from './shared/components/menu/menu.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserLayoutPage, AdminLayoutPage,MenuComponent],
   imports: [
     BrowserModule,
     SharedModule,

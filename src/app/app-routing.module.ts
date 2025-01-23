@@ -4,6 +4,8 @@ import { AccesoGuard } from './core/guards/acceso.guard';
 import { WatchedIntroGuard } from './core/guards/watchedIntro.guard';
 import { ValidAuthGuard } from './core/guards/validAuth.guard';
 import { NotWatchedIntroGuard } from './core/guards/notWatchedIntro.guard';
+import { UserLayoutPage } from './shared/layouts/user-layout/user-layout.page';
+import { AdminLayoutPage } from './shared/layouts/admin-layout/admin-layout.page';
 
 const routes: Routes = [
   {
@@ -12,20 +14,35 @@ const routes: Routes = [
     canActivate: [WatchedIntroGuard]
   },
   {
-    path: 'home',
-    loadChildren: () => import('./features/home/home.module').then( m => m.HomePageModule),
-    canActivate: [AccesoGuard]
-  },
-  {
     path: 'auth',
     loadChildren: () => import('./features/auth/auth.module').then( m => m.AuthModule),
     canActivate: [ValidAuthGuard, NotWatchedIntroGuard]
   },
   {
+    path: 'dashboard',
+    canActivate: [AccesoGuard],
+    component: AdminLayoutPage,
+  },
+  {
+    path: '',
+    canActivate: [AccesoGuard],
+    component: UserLayoutPage,
+    children: [
+      {
+        path: 'home',
+        loadChildren: () => import('./features/home/home.module').then( m => m.HomePageModule),
+      },
+      {
+        path: 'account',
+        loadChildren: () => import('./features/account-settings/account-settings.module').then( m => m.AccountSettingsPageModule)
+      }
+    ]
+  },
+  {
     path: '',
     redirectTo: 'intro',
     pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({

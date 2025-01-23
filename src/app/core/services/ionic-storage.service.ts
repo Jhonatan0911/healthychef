@@ -23,4 +23,8 @@ export class IonicStorageService {
   public async get(propierty: string){
     return this._storage.get(propierty);
   }
+
+  public async remove(propierty: string){
+    return this._storage.remove(propierty);
+  }
 }

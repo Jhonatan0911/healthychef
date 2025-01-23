@@ -30,6 +30,10 @@
   --ion-item-background: #1c1c1d;
 }
 
+ion-avatar {
+  --border-radius: 4px;
+}
+
 // html {
 //   --ion-dynamic-font: var(--ion-default-dynamic-font);
 //   --ion-font-family: 'Comic Sans MS';
