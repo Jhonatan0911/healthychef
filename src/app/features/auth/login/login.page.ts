@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorService } from 'src/app/core/services/error.service';
-import { IonicStorageService } from 'src/app/core/services/ionic-storage.service';
 import { LoginService } from '../shared/services/login.service';
-import { LoginRequest } from '../shared/models/Login';
+import { LoginRequest, LoginResponse } from '../shared/models/Login';
 import { NavController } from '@ionic/angular';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { UserService } from '../shared/services/user.service';
+import { BaseResponseUser } from 'src/app/core/models/base-response';
 
 @Component({
   selector: 'app-login',
@@ -21,11 +22,11 @@ export class LoginPage  implements OnInit {
   })
 
   constructor(
-    private _ionicStorageService: IonicStorageService,
     private _errorService: ErrorService,
     private _loginService: LoginService,
     private _navController: NavController,
-    private _alertService: AlertService
+    private _alertService: AlertService,
+    private _userService: UserService
   ) { }
 
   ngOnInit() {}
@@ -36,13 +37,16 @@ export class LoginPage  implements OnInit {
       const formValue = this.form.getRawValue();
 
       let loginRequest: LoginRequest = {
-        email: formValue.email!,
-        password: formValue.password!
+        user: {
+          email: formValue.email!,
+          password: formValue.password!
+        }
       }
 
       this._loginService.login(loginRequest).then(async res => {
         if(res){
-          await this._ionicStorageService.set('user', this.form.value)
+          let resMap = res as BaseResponseUser<LoginResponse>;
+          this._userService.setUser(resMap.user!);
           this._navController.navigateForward('/home')
         }
       }).catch(err =>{

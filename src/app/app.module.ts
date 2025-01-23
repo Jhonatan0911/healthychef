@@ -12,6 +12,7 @@ import { IonicStorageService } from './core/services/ionic-storage.service';
 import { UserLayoutPage } from './shared/layouts/user-layout/user-layout.page';
 import { AdminLayoutPage } from './shared/layouts/admin-layout/admin-layout.page';
 import { MenuComponent } from './shared/components/menu/menu.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, UserLayoutPage, AdminLayoutPage,MenuComponent],
@@ -24,7 +25,8 @@ import { MenuComponent } from './shared/components/menu/menu.component';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    IonicStorageService
+    IonicStorageService,
+    provideHttpClient()
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

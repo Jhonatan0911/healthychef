@@ -3,6 +3,8 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 import { ErrorService } from 'src/app/core/services/error.service';
 import { RegisterRequest } from '../shared/models/Register';
 import { RegisterService } from '../shared/services/register.service';
+import { AlertService } from 'src/app/core/services/alert.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +13,7 @@ import { RegisterService } from '../shared/services/register.service';
   standalone: false,
 })
 export class RegisterPage implements OnInit {
+  isToastOk = false;
 
   form = new FormGroup ({
     name: new FormControl(null, [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/), Validators.maxLength(50)]),
@@ -27,12 +30,14 @@ export class RegisterPage implements OnInit {
   constructor(
     private _errorService: ErrorService,
     private _registerService: RegisterService,
+    private _alertService: AlertService,
+    private _navController: NavController,
   ) {
     this.setupListeners();
+    this.isToastOk = false;
   }
 
   setupListeners(): void {
-    console.log('setupListeners')
     this.form.get('name')?.valueChanges.subscribe(() => this.getUserLogin());
     this.form.get('lastname')?.valueChanges.subscribe(() => this.getUserLogin());
   }
@@ -46,24 +51,30 @@ export class RegisterPage implements OnInit {
       const formValue = this.form.getRawValue();
 
       let registerRequest: RegisterRequest = {
-        name: formValue.name!,
-        lastname: formValue.lastname!,
-        email: formValue.email!,
-        username: formValue.username!,
-        password: formValue.password!,
-        confirmPassword: formValue.confirmPassword!
+        user: {
+          name: formValue.name!,
+          last_name: formValue.lastname!,
+          email: formValue.email!,
+          username: formValue.username!,
+          password: formValue.password!,
+          password_confirmation: formValue.confirmPassword!
+        }
       }
 
-      this._registerService.register(registerRequest);
+      this._registerService.register(registerRequest).then(async res => {
+        if(res){
+          this.isToastOk = true;
+          this._navController.navigateForward('/auth/login')
+        }
+      }).catch(err =>{
+        this._alertService.showAlert('Datos Invalidos','','Por favor revise detalladamente su información')
+      });
     }
   }
 
   getUserLogin(){
     const firstName = (this.form.get('name')?.value || '').split(' ')[0];
     const lastName = (this.form.get('lastname')?.value || '').split(' ')[0];
-
-    console.log(firstName)
-    console.log(this.form.get('lastname')?.value)
 
     if (!firstName || !lastName) {
       return;

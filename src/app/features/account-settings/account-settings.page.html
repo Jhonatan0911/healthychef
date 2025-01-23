@@ -9,19 +9,19 @@
     <ion-avatar>
       <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
     </ion-avatar>
-    <h2 class="font-bold">Jhonatan Piña</h2>
+    <h2 class="font-bold">{{user?.name + ' ' + user?.last_name}}</h2>
   </div>
 
   <ion-card>
     <ion-card-content>
       <ion-list>
         <ion-item>
-          <ion-label>Correo:</ion-label>
-          <ion-note slot="end">johndoe.com</ion-note>
+          <ion-label>Usuario:</ion-label>
+          <ion-note slot="end">{{user?.username}}</ion-note>
         </ion-item>
         <ion-item>
-          <ion-label>Teléfono:</ion-label>
-          <ion-note slot="end">+57 304 459 4213</ion-note>
+          <ion-label>Correo:</ion-label>
+          <ion-note slot="end">{{user?.email}}</ion-note>
         </ion-item>
       </ion-list>
     </ion-card-content>
@@ -38,7 +38,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Idioma</ion-label>
-      <ion-select slot="end" placeholder="Seleccionar">
+      <ion-select slot="end" placeholder="Seleccionar" value="es">
         <ion-select-option value="es">Español</ion-select-option>
         <ion-select-option value="en">Inglés</ion-select-option>
       </ion-select>

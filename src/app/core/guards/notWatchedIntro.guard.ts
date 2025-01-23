@@ -14,7 +14,6 @@ export class NotWatchedIntroGuard implements CanActivate {
 
   async canActivate(){
     const isWatchedIntro = await this._ionicStorageService.get('watchedIntro');
-    console.log(isWatchedIntro)
     if (!isWatchedIntro) {
       this._router.navigateByUrl('intro');
       return false;

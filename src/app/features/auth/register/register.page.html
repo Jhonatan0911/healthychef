@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <div class="bg-secondary h-full flex align-content-end justify-content-center flex-wrap">
+  <div class="bg-wave h-full flex align-content-end justify-content-center flex-wrap">
     <ion-card color="light" class="flex flex-column p-3 justify-content-center align-items-center w-full card-auth">
       <h1 class="text-primary font-semibold">Empecemos</h1>
       <form [formGroup]="form" class="form-container">
@@ -74,6 +74,9 @@
               </ion-input>
               <small *ngIf="validate('password')">{{ check('password') }}</small>
             </ion-col>
+          </ion-row>
+
+          <ion-row class="mt-3">
             <ion-col>
               <ion-input
                 fill="outline"
@@ -99,11 +102,17 @@
             type="submit"
             shape="round"
             (click)="register()">
-            Ingresar
+            Crear usuario
           </ion-button>
           <p class="text-secondary">¿Ya tienes una cuenta? <a class="text-primary font-bold" routerLink="/auth/login">Ingresa</a></p>
         </div>
       </form>
     </ion-card>
   </div>
+
+  <ion-toast
+    [isOpen]="isToastOk"
+    message="Usuario creado correctamente, inicie sesión."
+    [duration]="5000"
+  ></ion-toast>
 </ion-content>

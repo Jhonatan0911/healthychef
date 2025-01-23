@@ -19,6 +19,7 @@ export class SlideHome4Component  implements OnInit {
 
   goRegister(){
     this._ionicStorageService.set('watchedIntro', true)
+    this._router.navigateByUrl('auth/register')
   }
 
   goLogin(){

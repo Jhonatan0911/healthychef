@@ -8,7 +8,7 @@ export class AlertService {
 
   constructor(private alertController: AlertController) {}
 
-  async showAlert(header:string,subHeader?: string,message?: string,buttons?:AlertButton[]) {
+  async showAlert(header:string,subHeader?: string,message?: string,buttons?:string[]) {
     const alert = await this.alertController.create({
       header: header || undefined,
       subHeader: subHeader || undefined,
