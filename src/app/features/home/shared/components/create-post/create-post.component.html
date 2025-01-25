@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button shape="round"(click)="cancel()" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Agregar publicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="addPost()">
+        <ion-grid>
+          <ion-row class="mt-3">
+            <ion-col>
+              <p>Haz click para subir una imagen</p>
+              <img id="select-type-upload" [src]="form.value.image" class="w-full" style="height: 200px !important;">
+              <!-- <ion-input
+                fill="outline"
+                formControlName="image"
+                labelPlacement="stacked"
+                label="Imagen"
+                type="string">
+              </ion-input> -->
+              <small *ngIf="validate('image')">{{ check('image') }}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row class="mt-3">
+            <ion-col>
+              <ion-textarea
+                fill="outline"
+                formControlName="description"
+                labelPlacement="stacked"
+                label="Escribe algo..."
+                [counter]="true"
+                maxlength="255"
+                [autoGrow]="true"
+                type="string">
+              </ion-textarea>
+              <small *ngIf="validate('description')">{{ check('description') }}</small>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-button expand="block" type="submit" [disabled]="form.invalid">
+          Agregar Publicación
+        </ion-button>
+      </form>
+
+      <ion-alert
+        trigger="select-type-upload"
+        header="Seleccione una opción"
+        [inputs]="alertInputs"
+      ></ion-alert>
+
+      <ion-toast
+        [isOpen]="isCreateSuccess"
+        message="Publicación creada correctamente"
+        [duration]="5000"
+      ></ion-toast>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+

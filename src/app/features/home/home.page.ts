@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from './shared/services/posts.service';
 import { PostRequest, PostResponse } from './shared/models/Posts';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../auth/shared/services/user.service';
-import { LoginResponse } from '../auth/shared/models/Login';
 import { AlertService } from 'src/app/core/services/alert.service';
-import { ErrorService } from 'src/app/core/services/error.service';
+import { ModalController } from '@ionic/angular';
+import { CreatePostComponent } from './shared/components/create-post/create-post.component';
 
 @Component({
   selector: 'app-home',
@@ -16,16 +15,11 @@ export class HomePage implements OnInit {
 
   posts: PostResponse[] = [];
 
-  form = new FormGroup ({
-    description: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(255)]),
-    image: new FormControl(null, [Validators.required]),
-  })
+  isLoadingPost: boolean = false;
 
   constructor(
     private _postsService: PostsService,
-    private _userService: UserService,
-    private _alertService: AlertService,
-    private _errorService: ErrorService
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit(){
@@ -40,55 +34,26 @@ export class HomePage implements OnInit {
   }
 
   getAllPosts(){
+    this.isLoadingPost = true;
     this._postsService.getAll().then((data) => {
       this.posts = data as PostResponse[];
+      this.isLoadingPost = false;
     }).catch((error) => {
       this.posts = [];
+      this.isLoadingPost = false;
     });
   }
 
-  addImage() {
-    if (this.form.valid) {
+  async openModalCreate(){
+    const modal = await this.modalCtrl.create({
+      component: CreatePostComponent,
+    });
+    modal.present();
 
-      const formValue = this.form.getRawValue();
+    const { data, role } = await modal.onWillDismiss();
 
-      let user_id: number | null = null;
-
-      this._userService.getUserIdLoggin().then(res => {
-        user_id = res;
-      });
-
-      if(user_id){
-        const postRequest: PostRequest = {
-          post: {
-            description: formValue.description!,
-            image: formValue.image!,
-            user_id: user_id
-          }
-        };
-
-        this._postsService.create(postRequest).then(async res => {
-          if(res){
-            this.getAllPosts();
-            this.form.reset();
-          }
-        }).catch(err =>{
-          this._alertService.showAlert('Alerta','','Ha ocurrido un error por favor intente de nuevo')
-        });
-      }else{
-        this._alertService.showAlert('Alerta','','Ha ocurrido un error por favor intente de nuevo')
-      }
-
-    } else {
-      alert('Por favor, completa todos los campos.');
+    if (role === 'confirm') {
+      this.getAllPosts();
     }
-  }
-
-  validate(nameInput: string) {
-    return this._errorService.validateInput(this.form, nameInput);
-  }
-
-  check(nameInput: string) {
-    return this._errorService.checkInput(this.form, nameInput);
   }
 }
