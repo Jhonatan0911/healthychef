@@ -9,23 +9,17 @@
     <ion-avatar>
       <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
     </ion-avatar>
-    <h2 class="font-bold">{{user?.name + ' ' + user?.last_name}}</h2>
+    <h2 class="font-bold">
+      {{ (user?.name || '') + ' ' + (user?.last_name || '') }}
+    </h2>
   </div>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-label>Usuario:</ion-label>
-          <ion-note slot="end">{{user?.username}}</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Correo:</ion-label>
-          <ion-note slot="end">{{user?.email}}</ion-note>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <div class="flex flex-column align-items-center mb-2">
+    <ion-button fill="outline" class="px-5" (click)="goToPerfil()">
+      <ion-icon slot="start" name="create-outline"></ion-icon>
+      Perfil
+    </ion-button>
+  </div>
 
   <ion-list>
     <ion-item>

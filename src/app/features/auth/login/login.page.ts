@@ -46,7 +46,7 @@ export class LoginPage  implements OnInit {
       this._loginService.login(loginRequest).then(async res => {
         if(res){
           let resMap = res as BaseResponseUser<LoginResponse>;
-          this._userService.setUser(resMap.user!);
+          this._userService.setUserIdLoggin(resMap.user!.id!);
           this._navController.navigateForward('/home')
         }
       }).catch(err =>{

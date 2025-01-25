@@ -10,4 +10,9 @@ export class APIs {
     getAll: `${environment.apiUrl}/posts`,
     create: `${environment.apiUrl}/posts`,
   }
+
+  static user = {
+    getById: `${environment.apiUrl}/current_user/`,
+    updateById: `${environment.apiUrl}/update/`,
+  }
 };

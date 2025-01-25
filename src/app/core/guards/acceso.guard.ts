@@ -13,7 +13,7 @@ export class AccesoGuard implements CanActivate {
   ) { }
 
   async canActivate(){
-    const acceso = await this._ionicStorageService.get('user');
+    const acceso = await this._ionicStorageService.get('user_id');
 
     if (acceso) {
       return true;

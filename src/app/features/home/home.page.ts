@@ -14,7 +14,6 @@ import { ErrorService } from 'src/app/core/services/error.service';
 })
 export class HomePage implements OnInit {
 
-  user: LoginResponse | null = null;
   posts: PostResponse[] = [];
 
   form = new FormGroup ({
@@ -30,9 +29,6 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit(){
-    this._userService.getUser().then(res => {
-      this.user = res;
-    });
     this.getAllPosts();
   }
 
@@ -56,23 +52,32 @@ export class HomePage implements OnInit {
 
       const formValue = this.form.getRawValue();
 
-      const postRequest: PostRequest = {
-        post: {
-          description: formValue.description!,
-          image: formValue.image!,
-          user_id: this.user?.id!
-        }
-      };
+      let user_id: number | null = null;
 
-      this._postsService.create(postRequest).then(async res => {
-        if(res){
-          this.getAllPosts();
-          this.form.reset();
-        }
-      }).catch(err =>{
-        this._alertService.showAlert('Alerta','','Ha ocurrido un error por favor intente de nuevo')
+      this._userService.getUserIdLoggin().then(res => {
+        user_id = res;
       });
 
+      if(user_id){
+        const postRequest: PostRequest = {
+          post: {
+            description: formValue.description!,
+            image: formValue.image!,
+            user_id: user_id
+          }
+        };
+
+        this._postsService.create(postRequest).then(async res => {
+          if(res){
+            this.getAllPosts();
+            this.form.reset();
+          }
+        }).catch(err =>{
+          this._alertService.showAlert('Alerta','','Ha ocurrido un error por favor intente de nuevo')
+        });
+      }else{
+        this._alertService.showAlert('Alerta','','Ha ocurrido un error por favor intente de nuevo')
+      }
 
     } else {
       alert('Por favor, completa todos los campos.');

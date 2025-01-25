@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { IonicStorageService } from 'src/app/core/services/ionic-storage.service';
 import { UserService } from '../auth/shared/services/user.service';
-import { LoginResponse } from '../auth/shared/models/Login';
 import { ThemeToggleService } from 'src/app/core/utils/theme-toggle.service';
+import { UserResponse } from '../auth/shared/models/User';
 
 @Component({
   selector: 'app-account-settings',
@@ -27,7 +27,7 @@ export class AccountSettingsPage implements OnInit {
     },
   ];
 
-  user: LoginResponse | null = null;
+  user: UserResponse | null = null;
 
   constructor(
     private themeToggleService: ThemeToggleService,
@@ -37,8 +37,19 @@ export class AccountSettingsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._userService.getUser().then(res => {
-      this.user = res;
+    this.getUserLoggedIn();
+  }
+
+  async getUserLoggedIn(){
+
+    let user_id: number | null = null;
+
+    user_id = await this._userService.getUserIdLoggin();
+
+    this._userService.getUserById(user_id!).then((data) => {
+      this.user = data as UserResponse;
+    }).catch((error) => {
+      console.log(error);
     });
   }
 
@@ -49,6 +60,10 @@ export class AccountSettingsPage implements OnInit {
   async logout(){
     await this._ionicStorageService.remove('user');
     this._navController.navigateForward('/auth/login')
+  }
+
+  goToPerfil(){
+    this._navController.navigateForward('/profile')
   }
 
 }

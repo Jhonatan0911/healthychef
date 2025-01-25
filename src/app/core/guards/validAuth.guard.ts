@@ -13,7 +13,7 @@ export class ValidAuthGuard implements CanActivate {
   ) { }
 
   async canActivate(){
-    const isLogged = await this._ionicStorageService.get('user');
+    const isLogged = await this._ionicStorageService.get('user_id');
 
     if (isLogged) {
       this._router.navigateByUrl('home');
