@@ -26,6 +26,20 @@ export class PostsService {
     });
   }
 
+  getPostsPagination(page: number, perPage: number){
+    return new Promise((accept, reject) => {
+
+      this._apiService.get<PostResponse[]>(APIs.posts.getAll+ "?page="+page+"&per_page="+perPage).subscribe((data) => {
+        if(data.length > 0){
+          accept(data);
+        }else{
+          reject(data);
+        }
+      });
+
+    });
+  }
+
   create(data: PostRequest){
     return new Promise((accept, reject) => {
 

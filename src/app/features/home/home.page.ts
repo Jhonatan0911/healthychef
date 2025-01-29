@@ -14,6 +14,9 @@ import { CreatePostComponent } from './shared/components/create-post/create-post
 export class HomePage implements OnInit {
 
   posts: PostResponse[] = [];
+  page: number = 1;
+  limit: number = 10;
+  hasMore: boolean = true;
 
   isLoadingPost: boolean = false;
 
@@ -23,23 +26,38 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit(){
-    this.getAllPosts();
+    this.loadPost();
   }
 
   handleRefresh(event: CustomEvent) {
+    this.posts = [];
+    this.page = 1;
     setTimeout(() => {
-      this.getAllPosts();
+      this.loadPost();
       (event.target as HTMLIonRefresherElement).complete();
     }, 2000);
   }
 
-  getAllPosts(){
+  loadPost(event?: any){
     this.isLoadingPost = true;
-    this._postsService.getAll().then((data) => {
-      this.posts = data as PostResponse[];
-      this.isLoadingPost = false;
+    this._postsService.getPostsPagination(this.page,this.limit).then((data: any) => {
+      if(data.length > 0){
+        this.posts = [...this.posts,...data];
+        this.page++;
+        this.isLoadingPost = false;
+      }else{
+        this.hasMore = false;
+      }
+
+      if(event){
+        event.target.complete();
+      }
+
     }).catch((error) => {
       this.posts = [];
+      if(event){
+        event.target.complete();
+      }
       this.isLoadingPost = false;
     });
   }
@@ -53,7 +71,8 @@ export class HomePage implements OnInit {
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'confirm') {
-      this.getAllPosts();
+      this.page = 1;
+      this.loadPost();
     }
   }
 }

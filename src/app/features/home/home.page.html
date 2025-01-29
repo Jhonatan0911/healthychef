@@ -15,10 +15,14 @@
 
   <ng-template #noPosts>
     <ion-text color="medium">
-      <p class="ion-text-center" *ngIf="!isLoadingPost">No hay publicaciones</p>
+      <!-- <p class="ion-text-center" *ngIf="!isLoadingPost">No hay publicaciones</p> -->
       <ion-progress-bar *ngIf="isLoadingPost" buffer=".5"></ion-progress-bar>
     </ion-text>
   </ng-template>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadPost($event)" *ngIf="hasMore">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargandao más publicaciones..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button>
