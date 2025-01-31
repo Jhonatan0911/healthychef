@@ -1,7 +1,7 @@
 <ion-card>
   <ion-item lines="none">
-    <ion-avatar slot="start">
-      <img [src]="post.user.image" />
+    <ion-avatar slot="start" (click)="openImageModal(post.user.image)">
+      <img [src]="post.user.image" (error)="setDefaultImage($event)" />
     </ion-avatar>
     <ion-label>
       <h2>{{ post.user.name }}</h2>
@@ -9,7 +9,7 @@
     </ion-label>
   </ion-item>
 
-  <img [src]="post.image" />
+  <img class="w-full" [src]="post.image" (error)="setDefaultImage($event)"  (click)="openImageModal(post.image)"/>
 
   <ion-card-content>
     <p>{{ post.description }}</p>

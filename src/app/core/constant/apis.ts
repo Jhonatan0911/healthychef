@@ -14,5 +14,6 @@ export class APIs {
   static user = {
     getById: `${environment.apiUrl}/current_user/`,
     updateById: `${environment.apiUrl}/update/`,
+    getAll: `${environment.apiUrl}/list_users`,
   }
 };

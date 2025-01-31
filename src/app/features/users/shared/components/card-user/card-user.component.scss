@@ -1,0 +1,71 @@
+.user-card {
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+
+  .card-image {
+    width: 100%;
+    height: 65%;
+    background: #ccc;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .card-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+
+    h2 {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+
+    p {
+      font-size: 14px;
+      color: gray;
+      margin: 2px 0;
+    }
+
+    .followers {
+      font-weight: bold;
+      color: #555;
+    }
+
+    ion-button {
+      --color: #ff3b30;
+      --background: transparent;
+      font-size: 20px;
+
+      ion-icon {
+        font-size: 24px;
+        color: gray;
+        transition: color 0.3s;
+
+        &.following {
+          color: #ff3b30;
+        }
+      }
+    }
+  }
+}
+
+ion-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 10px;
+}

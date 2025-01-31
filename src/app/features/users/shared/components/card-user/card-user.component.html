@@ -1,0 +1,16 @@
+<ion-card class="user-card" *ngIf="user">
+  <div class="card-image" (click)="openImageModal(user.image)">
+    <img [src]="user.image" (error)="setDefaultImage($event)"  alt="{{ user.name }}" />
+  </div>
+  <div class="card-content">
+    <h2>{{ user.name }} {{ user.last_name }}</h2>
+    <p>{{ '@' + user.username }}</p>
+    <p class="followers">{{ user.followers.length }} seguidores</p>
+    <ion-button fill="clear" (click)="toggleFollow()">
+      <ion-icon
+        [class.following]="isFollowing(user)"
+        [name]="isFollowing(user) ? 'heart' : 'heart-outline'">
+      </ion-icon>
+    </ion-button>
+  </div>
+</ion-card>

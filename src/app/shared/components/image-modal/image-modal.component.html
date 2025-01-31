@@ -1,0 +1,12 @@
+<ion-header >
+  <ion-button fill="clear" (click)="closeModal()">
+    <ion-icon slot="icon-only" name="arrow-undo-circle-outline"></ion-icon>
+  </ion-button>
+</ion-header>
+
+
+<ion-content class="modal-content">
+  <div class="image-container">
+    <img [src]="imageUrl" alt="Imagen completa" (error)="setDefaultImage($event)"/>
+  </div>
+</ion-content>

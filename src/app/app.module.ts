@@ -17,10 +17,11 @@ import { provideHttpClient } from '@angular/common/http';
 /* This is to set the locale to spanish. */
 import localeEsPe from '@angular/common/locales/es-PE';
 import { DatePipe, registerLocaleData } from '@angular/common';
+import { ImageModalComponent } from './shared/components/image-modal/image-modal.component';
 registerLocaleData(localeEsPe, 'es-PE');
 
 @NgModule({
-  declarations: [AppComponent, UserLayoutPage, AdminLayoutPage,MenuComponent],
+  declarations: [AppComponent, UserLayoutPage, AdminLayoutPage,MenuComponent, ImageModalComponent],
   imports: [
     BrowserModule,
     SharedModule,

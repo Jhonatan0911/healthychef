@@ -3,16 +3,29 @@ export interface UserResponse {
   email: string;
   name: string;
   last_name: string;
-  created_at: string;
-  updated_at: string;
-  jti: string;
   image: string;
   username: string;
-  following_users: [],
-  followed_users: []
+  followees: [],
+  followers: []
 }
-
 
 export interface UserRequest {
   user: UserResponse
+}
+
+export interface Followers {
+  id: number,
+  email: string,
+  name: string
+}
+
+export interface UserPaginationResponse {
+  users: UserResponse[],
+  meta:Pagination
+}
+
+export interface Pagination  {
+  total_pages: number,
+  current_page: number,
+  total_count: number
 }

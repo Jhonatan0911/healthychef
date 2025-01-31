@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../auth/shared/services/user.service';
 import { UserResponse } from '../auth/shared/models/User';
 import { PhotoService } from 'src/app/core/services/photo.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -40,7 +40,8 @@ export class ProfilePage implements OnInit {
   constructor(
     private _userService: UserService,
     private _photoService: PhotoService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private _navController: NavController
   ) { }
 
   ngOnInit() {
@@ -93,6 +94,10 @@ export class ProfilePage implements OnInit {
     }).catch((error) => {
       console.log(error);
     });
+  }
+
+  volver(){
+    this._navController.navigateForward('/account')
   }
 
 

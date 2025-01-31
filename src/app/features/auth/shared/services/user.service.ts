@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { LoginResponse } from '../models/Login';
 import { IonicStorageService } from 'src/app/core/services/ionic-storage.service';
 import { APIs } from 'src/app/core/constant/apis';
-import { PostResponse } from 'src/app/features/home/shared/models/Posts';
 import { ApiService } from 'src/app/core/services/api.service';
-import { UserRequest, UserResponse } from '../models/User';
+import { UserPaginationResponse, UserRequest, UserResponse } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +48,19 @@ export class UserService {
         }
       });
 
+    });
+  }
+
+  getUsersPagination(page: number, perPage: number, query: string = ''): Promise<UserPaginationResponse>{
+    return new Promise<UserPaginationResponse>((resolve, reject) => {
+      this._apiService.get<UserPaginationResponse>(`${APIs.user.getAll}?page=${page}&per_page=${perPage}&query=${query}`).subscribe((data) => {
+        if (data.users.length > 0) {
+          resolve(data);
+        } else {
+          reject(data);
+        }
+      }
+      );
     });
   }
 

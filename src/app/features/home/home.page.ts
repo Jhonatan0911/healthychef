@@ -54,7 +54,6 @@ export class HomePage implements OnInit {
       }
 
     }).catch((error) => {
-      this.posts = [];
       if(event){
         event.target.complete();
       }

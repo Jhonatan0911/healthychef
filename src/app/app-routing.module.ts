@@ -33,6 +33,10 @@ const routes: Routes = [
         loadChildren: () => import('./features/home/home.module').then( m => m.HomePageModule),
       },
       {
+        path: 'users',
+        loadChildren: () => import('./features/users/users.module').then( m => m.UsersPageModule)
+      },
+      {
         path: 'account',
         loadChildren: () => import('./features/account-settings/account-settings.module').then( m => m.AccountSettingsPageModule)
       },

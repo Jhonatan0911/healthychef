@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-searchbar class="mb-3" placeholder="Buscar usuarios..." (ionInput)="searchUsers($event)">
+  </ion-searchbar>
+
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container *ngIf="users?.length; else noUsers">
+    <app-card-user *ngFor="let user of users" [user]="user"></app-card-user>
+  </ng-container>
+
+  <ng-template #noUsers>
+    <ion-text color="medium">
+      <!-- <p class="ion-text-center" *ngIf="!isLoadingPost">No hay usuarios</p> -->
+      <ion-progress-bar *ngIf="isLoadingUsers" buffer=".5"></ion-progress-bar>
+    </ion-text>
+  </ng-template>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadUsers($event)" *ngIf="hasMore">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más usuarios..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
