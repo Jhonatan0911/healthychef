@@ -15,5 +15,7 @@ export class APIs {
     getById: `${environment.apiUrl}/current_user/`,
     updateById: `${environment.apiUrl}/update/`,
     getAll: `${environment.apiUrl}/list_users`,
+    follow: `${environment.apiUrl}/follow/`,
+    unfollow: `${environment.apiUrl}/unfollow/`,
   }
 };

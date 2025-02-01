@@ -5,12 +5,16 @@ export interface UserResponse {
   last_name: string;
   image: string;
   username: string;
-  followees: [],
-  followers: []
+  followees: Followers[],
+  followers: Followers[]
 }
 
 export interface UserRequest {
   user: UserResponse
+}
+
+export interface UserFollowRequest {
+  followee_id: number
 }
 
 export interface Followers {

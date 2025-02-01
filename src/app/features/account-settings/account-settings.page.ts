@@ -46,8 +46,8 @@ export class AccountSettingsPage implements OnInit {
 
     user_id = await this._userService.getUserIdLoggin();
 
-    this._userService.getUserById(user_id!).then((data) => {
-      this.user = data as UserResponse;
+    this._userService.getUserById(user_id!).then((data: UserResponse) => {
+      this.user = data;
     }).catch((error) => {
       console.log(error);
     });

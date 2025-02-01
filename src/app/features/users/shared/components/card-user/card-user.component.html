@@ -8,8 +8,8 @@
     <p class="followers">{{ user.followers.length }} seguidores</p>
     <ion-button fill="clear" (click)="toggleFollow()">
       <ion-icon
-        [class.following]="isFollowing(user)"
-        [name]="isFollowing(user) ? 'heart' : 'heart-outline'">
+        [class.following]="isFollowing(user.id)"
+        [name]="isFollowing(user.id) ? 'heart' : 'heart-outline'">
       </ion-icon>
     </ion-button>
   </div>
