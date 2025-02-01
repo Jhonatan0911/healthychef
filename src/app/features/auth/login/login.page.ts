@@ -47,7 +47,7 @@ export class LoginPage  implements OnInit {
         if(res){
           let resMap = res as BaseResponseUser<LoginResponse>;
           this._userService.setUserIdLoggin(resMap.user!.id!);
-          this._navController.navigateForward('/home')
+          this._navController.navigateForward('/app/home')
         }
       }).catch(err =>{
         this._alertService.showAlert('Datos Invalidos','','Por favor revise su correo y contraseña')

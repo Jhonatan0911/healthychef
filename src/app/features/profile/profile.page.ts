@@ -97,7 +97,7 @@ export class ProfilePage implements OnInit {
   }
 
   volver(){
-    this._navController.navigateForward('/account')
+    this._navController.navigateForward('/app/account')
   }
 
 

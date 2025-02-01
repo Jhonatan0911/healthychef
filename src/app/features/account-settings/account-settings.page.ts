@@ -63,7 +63,7 @@ export class AccountSettingsPage implements OnInit {
   }
 
   goToPerfil(){
-    this._navController.navigateForward('/profile')
+    this._navController.navigateForward('/app/profile')
   }
 
 }

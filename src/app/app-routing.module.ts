@@ -24,7 +24,7 @@ const routes: Routes = [
     component: AdminLayoutPage,
   },
   {
-    path: '',
+    path: 'app',
     canActivate: [AccesoGuard],
     component: UserLayoutPage,
     children: [
