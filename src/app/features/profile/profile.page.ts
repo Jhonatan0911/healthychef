@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../auth/shared/services/user.service';
 import { UserResponse } from '../auth/shared/models/User';
 import { PhotoService } from 'src/app/core/services/photo.service';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
+import { EditUserComponent } from './shared/components/edit-user/edit-user.component';
 
 @Component({
   selector: 'app-profile',
@@ -41,7 +42,8 @@ export class ProfilePage implements OnInit {
     private _userService: UserService,
     private _photoService: PhotoService,
     private alertController: AlertController,
-    private _navController: NavController
+    private _navController: NavController,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
@@ -100,6 +102,17 @@ export class ProfilePage implements OnInit {
     this._navController.navigateForward('/app/account')
   }
 
+  async openModalEdit(){
+    const modal = await this.modalCtrl.create({
+      component: EditUserComponent,
+    });
+    modal.present();
 
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      this.getUserLoggedIn();
+    }
+  }
 
 }

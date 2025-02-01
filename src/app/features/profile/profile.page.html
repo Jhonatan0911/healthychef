@@ -23,7 +23,12 @@
     <h2 class="font-bold">
       {{ (user?.name || '') + ' ' + (user?.last_name || '') }}
     </h2>
-    <ion-label class="mb-3">{{user?.email}}</ion-label>
+    <span class="flex justify-content-center align-items-center gap-2">
+      <ion-label>{{user?.email}}</ion-label>
+      <!-- <ion-button fill="clear" id="logout-alert"> -->
+        <ion-icon (click)="openModalEdit()" slot="icon-only" name="pencil-outline" color="primary"></ion-icon>
+      <!-- </ion-button> -->
+    </span>
   </div>
 
   <ion-card>
@@ -45,10 +50,10 @@
 
   <ion-segment color="dark" value="dark">
     <ion-segment-button value="dark">
-      <ion-label>Dark</ion-label>
+      <ion-label>Mis Posts</ion-label>
     </ion-segment-button>
     <ion-segment-button value="segment">
-      <ion-label>Segment</ion-label>
+      <ion-label>Seguidores</ion-label>
     </ion-segment-button>
   </ion-segment>
 

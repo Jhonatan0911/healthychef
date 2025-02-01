@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button shape="round"(click)="cancel()" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Editar Información</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="updateUser()" class="form-container">
+        <ion-grid>
+          <ion-row class="mt-3">
+            <ion-col>
+              <ion-input
+                fill="outline"
+                formControlName="name"
+                labelPlacement="stacked"
+                label="Nombres"
+                type="text">
+                <ion-icon slot="start" name="person-outline" aria-hidden="user"></ion-icon>
+              </ion-input>
+              <small *ngIf="validate('name')">{{ check('name') }}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row class="mt-3">
+            <ion-col>
+              <ion-input
+                fill="outline"
+                formControlName="lastname"
+                labelPlacement="stacked"
+                label="Apellidos"
+                type="text">
+                <ion-icon slot="start" name="person-outline" aria-hidden="user"></ion-icon>
+              </ion-input>
+              <small *ngIf="validate('lastname')">{{ check('lastname') }}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row class="mt-3">
+            <ion-col>
+              <ion-input
+                fill="outline"
+                formControlName="email"
+                labelPlacement="stacked"
+                label="Correo electrónico"
+                type="email">
+                <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+              </ion-input>
+              <small *ngIf="validate('email')">{{ check('email') }}</small>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-button expand="block" type="submit" [disabled]="form.invalid">
+          Guardar Cambios
+        </ion-button>
+      </form>
+
+      <ion-toast
+        [isOpen]="isEditSuccess"
+        message="Editado correctamente"
+        [duration]="5000"
+      ></ion-toast>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
