@@ -58,7 +58,7 @@ export class AccountSettingsPage implements OnInit {
   }
 
   async logout(){
-    await this._ionicStorageService.remove('user');
+    await this._ionicStorageService.remove('user_id');
     this._navController.navigateForward('/auth/login')
   }
 

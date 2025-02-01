@@ -71,6 +71,7 @@ export class HomePage implements OnInit {
 
     if (role === 'confirm') {
       this.page = 1;
+      this.posts = [];
       this.loadPost();
     }
   }
